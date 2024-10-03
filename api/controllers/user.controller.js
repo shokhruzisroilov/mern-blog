@@ -15,7 +15,7 @@ export const updateUser = async (req, res, next) => {
 		if (req.body.password.length < 6) {
 			return next(errorHandler(400, 'Password must be at least 6 characters'))
 		}
-		req.body.password = bcryptjs.hashSync(req.body.password, 10) // bcryptjs used here
+		req.body.password = bcryptjs.hashSync(req.body.password, 10)
 	}
 
 	if (req.body.username) {
@@ -38,7 +38,6 @@ export const updateUser = async (req, res, next) => {
 	}
 
 	try {
-		// Check if the user exists
 		const updatedUser = await User.findByIdAndUpdate(
 			req.params.userId,
 			{
@@ -56,10 +55,10 @@ export const updateUser = async (req, res, next) => {
 			return next(errorHandler(404, 'User not found'))
 		}
 
-		const { password, ...rest } = updatedUser._doc // Exclude password
-		return res.status(200).json(rest) // Send updated user info
+		const { password, ...rest } = updatedUser._doc
+		return res.status(200).json(rest)
 	} catch (error) {
-		console.error(error) // Log error for debugging
-		next(error) // Pass error to error handler
+		console.error(error)
+		next(error)
 	}
 }

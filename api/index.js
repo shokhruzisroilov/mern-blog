@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 
 dotenv.config()
 
@@ -13,6 +14,10 @@ mongoose
 	.catch(err => console.log(err))
 
 const app = express()
+
+// Enable CORS with default options (allow all origins)
+app.use(cors())
+
 app.use(express.json())
 app.use(cookieParser())
 
