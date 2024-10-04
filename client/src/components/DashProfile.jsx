@@ -21,9 +21,11 @@ import {
 } from '../redux/user/userSlice'
 import { useDispatch } from 'react-redux'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 
 export default function DashProfile() {
-	const { currentUser, error } = useSelector(state => state.user)
+	const { currentUser, error, loading } = useSelector(state => state.user)
+	// console.log(currentUser)
 	const [imageFileUrl, setImageFileUrl] = useState(null)
 	const [imageFile, setImageFile] = useState(null)
 	// const [username, setUsername] = useState('')
@@ -163,7 +165,7 @@ export default function DashProfile() {
 	}
 
 	return (
-		<div className='max-w-lg mx-auto p-3 w-full'>
+		<div className='max-w-lg mx-auto p-3 w-full mb-12'>
 			<h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
 			<form onSubmit={handleSubmit} className='flex flex-col gap-4'>
 				<input
@@ -232,9 +234,25 @@ export default function DashProfile() {
 					placeholder='password'
 					onChange={handleChange}
 				/>
-				<Button type='submit' gradientDuoTone='purpleToBlue' outline>
-					Update
+				<Button
+					type='submit'
+					gradientDuoTone='purpleToBlue'
+					outline
+					disabled={loading || imageFileUploading}
+				>
+					{loading ? 'Loading...' : 'Update'}
 				</Button>
+				{currentUser.isAdmin && (
+					<Link to='/create-post'>
+						<Button
+							type='button'
+							gradientDuoTone='purpleToPink'
+							className='w-full'
+						>
+							Create a post
+						</Button>
+					</Link>
+				)}
 			</form>
 			<div className='text-red-500 flex justify-between mt-5'>
 				<span onClick={() => setShowModal(true)} className='cursor-pointer'>
