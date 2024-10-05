@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { Button, FileInput, Select, TextInput } from 'flowbite-react'
 
 const CreatePost = () => {
-	const [value, setValue] = useState('')
 	return (
 		<div className='p-3 max-w-3xl mx-auto min-h-screen'>
 			<h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
@@ -37,8 +35,6 @@ const CreatePost = () => {
 				</div>
 				<ReactQuill
 					theme='snow'
-					value={value}
-					onChange={setValue}
 					placeholder='Write something...'
 					className='h-72 mb-12'
 					required

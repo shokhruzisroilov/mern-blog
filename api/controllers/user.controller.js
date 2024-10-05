@@ -1,6 +1,6 @@
 import User from '../models/user.modele.js'
 import { errorHandler } from '../utils/error.js'
-import bcryptjs from 'bcryptjs' // Add this line to fix the issue
+import bcryptjs from 'bcryptjs'
 
 export const test = (req, res) => {
 	res.json({ message: 'API is working!' })
